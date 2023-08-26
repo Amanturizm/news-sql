@@ -28,7 +28,10 @@ const NewsItemFull: React.FC<Props> = ({ fullItem }) => {
         </Box>
       </Box>
 
-      <img src={imageUrl} alt="img" />
+      {
+        fullItem.image ?
+        <img src={imageUrl} alt="img" /> : null
+      }
     </Box>
   );
 };

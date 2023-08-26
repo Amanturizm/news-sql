@@ -18,9 +18,11 @@ export const postComment = createAsyncThunk<void, { state: ICommentFormState, id
   }
 );
 
-export const deleteComment = createAsyncThunk<void, string>(
+export const deleteComment = createAsyncThunk<string, string>(
   'comments/deleteComment',
   async (id) => {
     await axiosApi.delete('/comments/' + id);
+
+    return id;
   }
 );

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Box, Button, TextField, Typography } from '@mui/material';
-import { useAppDispatch } from '../../app/hook';
+import { Box, Button, CircularProgress, TextField, Typography } from '@mui/material';
+import { useAppDispatch, useAppSelector } from '../../app/hook';
 import { fetchALlCurrentNewsItemComments, postComment } from '../../features/Comments/commentsThunk';
 import { ICommentFormState } from '../../types';
 import { useParams } from 'react-router-dom';
@@ -11,8 +11,11 @@ const initialState: ICommentFormState = {
 };
 
 const CommentsForm = () => {
-  const { id } = useParams() as { id: string };
   const dispatch = useAppDispatch();
+  const { postCommentLoading } = useAppSelector(state => state.comments);
+
+  const { id } = useParams() as { id: string };
+
   const [state, setState] = useState<ICommentFormState>(initialState);
 
   const changeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,8 +64,15 @@ const CommentsForm = () => {
         <Button variant="contained"
                 sx={{ width: 100 }}
                 type="submit"
+                disabled={postCommentLoading}
         >
           Add
+          {
+            postCommentLoading ?
+              <Box sx={{ display: 'flex', marginLeft: 1 }}>
+                <CircularProgress size={20} />
+              </Box> : null
+          }
         </Button>
       </Box>
     </Box>

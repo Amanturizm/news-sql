@@ -5,14 +5,15 @@ import { useParams } from 'react-router-dom';
 import NewsItemFull from '../NewsItemFull/NewsItemFull';
 import { fetchALlCurrentNewsItemComments } from '../../features/Comments/commentsThunk';
 import Comments from '../Comments/Comments';
-import { Box } from '@mui/material';
+import { Box, LinearProgress } from '@mui/material';
+import Preloader from '../UI/Preloader/Preloader';
 
 const NewsFull = () => {
   const { id } = useParams() as { id: string };
 
   const dispatch = useAppDispatch();
-  const { newsItemFull } = useAppSelector(state => state.news);
-  const { comments } = useAppSelector(state => state.comments);
+  const { newsItemFull, newsItemFullLoading } = useAppSelector(state => state.news);
+  const { comments, commentsLoading } = useAppSelector(state => state.comments);
 
   useEffect(() => {
     if (id) {
@@ -30,7 +31,15 @@ const NewsFull = () => {
       }
 
       {
+        newsItemFullLoading && <Preloader />
+      }
+
+      {
         comments ? <Comments comments={comments} /> : null
+      }
+
+      {
+        commentsLoading && <LinearProgress />
       }
     </Box>
   );

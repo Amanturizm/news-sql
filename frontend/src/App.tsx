@@ -11,7 +11,9 @@ const App = () => (
     <Routes>
       <Route path="/" element={<News />} />
       <Route path="/news" element={<News />} />
+      <Route path="/new-post" element={<NewPostForm />} />
       <Route path="/news/new-post" element={<NewPostForm />} />
+      <Route path="/:id" element={<NewsItemFull />} />
       <Route path="/news/:id" element={<NewsItemFull />} />
 
       <Route path="*" element={<NotFound />} />

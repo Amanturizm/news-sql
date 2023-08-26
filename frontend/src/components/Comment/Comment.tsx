@@ -1,7 +1,7 @@
 import React from 'react';
 import { IComment } from '../../types';
-import { Box, Button, Typography } from '@mui/material';
-import { useAppDispatch } from '../../app/hook';
+import { Box, Button, CircularProgress, Typography } from '@mui/material';
+import { useAppDispatch, useAppSelector } from '../../app/hook';
 import { deleteComment, fetchALlCurrentNewsItemComments } from '../../features/Comments/commentsThunk';
 
 interface Props {
@@ -10,6 +10,7 @@ interface Props {
 
 const Comment: React.FC<Props> = ({ comment }) => {
   const dispatch = useAppDispatch();
+  const { deleteCommentLoading } = useAppSelector(state => state.comments);
 
   const onDelete = async () => {
     await dispatch(deleteComment(comment.id));
@@ -36,8 +37,14 @@ const Comment: React.FC<Props> = ({ comment }) => {
       </Box>
       <Button variant="contained"
               onClick={onDelete}
+              disabled={deleteCommentLoading === comment.id}
       >
-        Delete
+        {
+          deleteCommentLoading === comment.id ?
+            <Box sx={{ display: 'flex' }}>
+              <CircularProgress size={20} />
+            </Box> : 'Delete'
+        }
       </Button>
     </Box>
   );

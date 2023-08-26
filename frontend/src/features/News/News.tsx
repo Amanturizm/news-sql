@@ -4,10 +4,11 @@ import { fetchAll } from './newsThunk';
 import NewsItem from '../../components/NewsItem/NewsItem';
 import { Box, Button, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import Preloader from '../../components/UI/Preloader/Preloader';
 
 const News = () => {
   const dispatch = useAppDispatch();
-  const { news } = useAppSelector(state => state.news);
+  const { news, newsLoading } = useAppSelector(state => state.news);
 
   useEffect(() => {
     dispatch(fetchAll());
@@ -19,6 +20,7 @@ const News = () => {
            display="flex"
            justifyContent="space-between"
            alignItems="center"
+           margin="20px 0"
       >
         <Typography variant="h2">
           Posts
@@ -35,7 +37,10 @@ const News = () => {
            flexDirection="column"
            gap={2}
       >
-        {news.map(newsItem => <NewsItem newsItem={newsItem} key={newsItem.id} />)}
+        {
+          newsLoading ? <Preloader /> :
+          news.map(newsItem => <NewsItem newsItem={newsItem} key={newsItem.id} />)
+        }
       </Box>
     </div>
   );

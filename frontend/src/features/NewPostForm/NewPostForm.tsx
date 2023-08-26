@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Box, Button, TextField, Typography } from '@mui/material';
-import { useAppDispatch } from '../../app/hook';
+import { Box, Button, CircularProgress, TextField, Typography } from '@mui/material';
+import { useAppDispatch, useAppSelector } from '../../app/hook';
 import { fetchAll, postOne } from '../News/newsThunk';
 import FileInput from '../../components/UI/FileInput/FileInput';
 import { INewsItemFormState } from '../../types';
@@ -13,6 +13,8 @@ const initialState: INewsItemFormState = {
 
 const NewPostForm = () => {
   const dispatch = useAppDispatch();
+
+  const { postLoading } = useAppSelector(state => state.news);
 
   const [state, setState] = useState<INewsItemFormState>(initialState);
 
@@ -70,13 +72,14 @@ const NewPostForm = () => {
         variant="outlined"
         sx={{ width: 100 }}
         type="submit"
+        disabled={postLoading}
       >
         Save
         {
-          // messagePostLoading ?
-          //   <Box sx={{ display: 'flex' }}>
-          //     <CircularProgress size={30} />
-          //   </Box> : null
+          postLoading ?
+            <Box sx={{ display: 'flex', marginLeft: 1 }}>
+              <CircularProgress size={20} />
+            </Box> : null
         }
       </Button>
       </Box>

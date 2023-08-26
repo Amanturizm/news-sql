@@ -37,9 +37,11 @@ export const postOne = createAsyncThunk<void, INewsItemFormState>(
   }
 );
 
-export const deleteOne = createAsyncThunk<void, string>(
+export const deleteOne = createAsyncThunk<string, string>(
   'news/deleteOne',
   async (id) => {
     await axiosApi.delete('/news/' + id);
+
+    return id;
   }
 );
