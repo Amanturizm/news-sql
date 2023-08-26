@@ -5,3 +5,10 @@ export interface INewsItem {
   image: string;
   datetime?: string;
 }
+
+export interface IComment {
+  id: string;
+  id_news: string;
+  author: string;
+  text: string;
+}

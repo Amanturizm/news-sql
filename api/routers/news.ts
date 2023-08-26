@@ -6,8 +6,6 @@ import {OkPacketParams} from "mysql2";
 
 const newsRouter = express.Router();
 
-const TYPE = 'news';
-
 newsRouter.get('/', async (req, res) => {
   const connection = mysqlDb.getConnection();
   const result = await connection.query('SELECT * FROM news');
