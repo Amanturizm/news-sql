@@ -1,15 +1,22 @@
 import express from "express";
+import { imagesUpload } from "../multer";
+import { OkPacketParams } from "mysql2";
 import mysqlDb from "../mysqlDb";
-import {INewsItem} from "../types";
-import {imagesUpload} from "../multer";
-import {OkPacketParams} from "mysql2";
+import { INewsItem } from "../types";
 
 const newsRouter = express.Router();
 
 newsRouter.get('/', async (req, res) => {
   const connection = mysqlDb.getConnection();
   const result = await connection.query('SELECT * FROM news');
-  res.send(result[0]);
+
+  const news = result[0] as INewsItem[];
+
+  const newsWithoutContent = news.map(({ id, title, image, datetime }) => (
+    { id, title, image, datetime }
+  )) as INewsItem[];
+
+  res.send(newsWithoutContent);
 });
 
 newsRouter.get('/:id', async (req, res) => {
@@ -37,7 +44,7 @@ newsRouter.post('/', imagesUpload.single('image'), async (req, res) => {
   const newsItem: Omit<INewsItem, 'id'> = {
     title: req.body.title,
     content: req.body.content,
-    image: req.file ? req.file.filename : ''
+    image: req.file ? 'images/' + req.file.filename : ''
   };
 
   const connection = mysqlDb.getConnection();

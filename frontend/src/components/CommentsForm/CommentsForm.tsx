@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { Box, Button, TextField, Typography } from '@mui/material';
 
 interface State {
-  title: string;
+  author: string;
   text: string;
 }
 
 const initialState: State = {
-  title: '',
+  author: '',
   text: '',
 };
 
@@ -33,12 +33,14 @@ const CommentsForm = () => {
       >
         <TextField
           label="Name"
-          value={state.title}
+          name="author"
+          value={state.author}
           onChange={changeValue}
         />
 
         <TextField
           label="Comment"
+          name="text"
           value={state.text}
           onChange={changeValue}
         />

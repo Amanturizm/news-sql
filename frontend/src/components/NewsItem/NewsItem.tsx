@@ -9,6 +9,8 @@ interface Props {
 }
 
 const NewsItem: React.FC<Props> = ({ newsItem }) => {
+  const imageUrl = apiUrl + '/' + newsItem.image;
+
   return (
     <Box component="div"
          display="flex"
@@ -17,7 +19,7 @@ const NewsItem: React.FC<Props> = ({ newsItem }) => {
          border={2}
          paddingX={3}
     >
-      <img src={apiUrl + newsItem.image} alt="img" />
+      <img src={imageUrl} alt="img" style={{ width: 100 }} />
       <Box component="div">
         <Typography variant="h3">
           {newsItem.title}

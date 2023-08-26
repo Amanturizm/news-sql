@@ -12,3 +12,9 @@ export interface IComment {
   author: string;
   text: string;
 }
+
+export interface IFormState {
+  title: string;
+  content: string;
+  image: File | null;
+}

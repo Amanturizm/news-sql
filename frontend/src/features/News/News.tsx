@@ -23,13 +23,11 @@ const News = () => {
         <Typography variant="h2">
           Posts
         </Typography>
-        <Button variant="outlined"
-                sx={{ height: 40 }}
-        >
-          <Link to="new-post" style={{ textDecoration: 'none', color: '#1976d2' }}>
-            Add new post
+          <Link to="new-post">
+            <Button variant="outlined" sx={{ height: 40 }}>
+              Add new post
+            </Button>
           </Link>
-        </Button>
       </Box>
 
       <Box component="div"
