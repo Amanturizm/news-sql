@@ -30,7 +30,7 @@ const NewsItem: React.FC<Props> = ({ newsItem }) => {
           <Typography variant="h6">
             {newsItem.datetime}
           </Typography>
-          <Link to={'/' + newsItem.id} style={{ fontSize: "1.2rem" }}>Read Full Post {'>>'}</Link>
+          <Link to={newsItem.id + ''} style={{ fontSize: "1.2rem" }}>Read Full Post {'>>'}</Link>
         </Box>
       </Box>
       <Button variant="contained"

@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hook';
 import { fetchAll } from './newsThunk';
 import NewsItem from '../../components/NewsItem/NewsItem';
 import { Box, Button, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const News = () => {
   const dispatch = useAppDispatch();
@@ -25,7 +26,9 @@ const News = () => {
         <Button variant="outlined"
                 sx={{ height: 40 }}
         >
-          Add new post
+          <Link to="new-post" style={{ textDecoration: 'none', color: '#1976d2' }}>
+            Add new post
+          </Link>
         </Button>
       </Box>
 

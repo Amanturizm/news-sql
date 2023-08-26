@@ -10,3 +10,12 @@ export const fetchAll = createAsyncThunk<INewsItem[]>(
     return data;
   }
 );
+
+export const fetchOne = createAsyncThunk<INewsItem, string>(
+  'news/fetchOne',
+  async (id) => {
+    const { data } = await axiosApi('/news/' + id);
+
+    return data;
+  }
+);
