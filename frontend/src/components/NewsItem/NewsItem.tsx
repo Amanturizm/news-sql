@@ -3,13 +3,22 @@ import { Link } from 'react-router-dom';
 import { Box, Button, Typography } from '@mui/material';
 import { INewsItem } from '../../types';
 import { apiUrl } from '../../constants';
+import { useAppDispatch } from '../../app/hook';
+import { deleteOne, fetchAll } from '../../features/News/newsThunk';
 
 interface Props {
   newsItem: INewsItem;
 }
 
 const NewsItem: React.FC<Props> = ({ newsItem }) => {
+  const dispatch = useAppDispatch();
+
   const imageUrl = apiUrl + '/' + newsItem.image;
+
+  const onDelete = async () => {
+    await dispatch(deleteOne(newsItem.id));
+    await dispatch(fetchAll());
+  };
 
   return (
     <Box component="div"
@@ -37,6 +46,7 @@ const NewsItem: React.FC<Props> = ({ newsItem }) => {
       </Box>
       <Button variant="contained"
               sx={{ height: 40 }}
+              onClick={onDelete}
       >
         Delete
       </Button>

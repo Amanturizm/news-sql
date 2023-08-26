@@ -22,7 +22,7 @@ const Comments: React.FC<Props> = ({ comments }) => {
            gap={2}
       >
         {
-          comments.map(comment => <Comment comment={comment} />)
+          comments.map(comment => <Comment comment={comment} key={comment.id} />)
         }
       </Box>
 

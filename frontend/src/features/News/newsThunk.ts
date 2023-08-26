@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axiosApi from '../../axiosApi';
-import { IFormState, INewsItem } from '../../types';
+import { INewsItemFormState, INewsItem } from '../../types';
 
 export const fetchAll = createAsyncThunk<INewsItem[]>(
   'news/fetchAll',
@@ -20,12 +20,12 @@ export const fetchOne = createAsyncThunk<INewsItem, string>(
   }
 );
 
-export const postOne = createAsyncThunk<void, IFormState>(
+export const postOne = createAsyncThunk<void, INewsItemFormState>(
   'news/postOne',
   async (newPost) => {
     const formData = new FormData();
 
-    const keys = Object.keys(newPost) as (keyof IFormState)[];
+    const keys = Object.keys(newPost) as (keyof INewsItemFormState)[];
     keys.forEach(key => {
       const value = newPost[key];
 
@@ -34,5 +34,12 @@ export const postOne = createAsyncThunk<void, IFormState>(
       }
     });
     await axiosApi.post('/news', formData);
+  }
+);
+
+export const deleteOne = createAsyncThunk<void, string>(
+  'news/deleteOne',
+  async (id) => {
+    await axiosApi.delete('/news/' + id);
   }
 );

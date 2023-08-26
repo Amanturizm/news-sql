@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IComment } from '../../types';
-import { fetchALlCurrentNewsItem } from './commentsThunk';
+import { fetchALlCurrentNewsItemComments } from './commentsThunk';
 
 interface State {
   comments: IComment[];
@@ -15,7 +15,7 @@ const commentsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(fetchALlCurrentNewsItem.fulfilled, (state: State, { payload }) => {
+    builder.addCase(fetchALlCurrentNewsItemComments.fulfilled, (state: State, { payload }) => {
       state.comments = payload;
     });
   }

@@ -8,6 +8,8 @@ interface Props {
 }
 
 const NewsItemFull: React.FC<Props> = ({ fullItem }) => {
+  const imageUrl = apiUrl + '/' + fullItem.image;
+
   return (
     <Box component="div"
          display="flex"
@@ -26,7 +28,7 @@ const NewsItemFull: React.FC<Props> = ({ fullItem }) => {
         </Box>
       </Box>
 
-      <img src={apiUrl + fullItem.image} alt="img" />
+      <img src={imageUrl} alt="img" />
     </Box>
   );
 };

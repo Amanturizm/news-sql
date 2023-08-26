@@ -13,8 +13,13 @@ export interface IComment {
   text: string;
 }
 
-export interface IFormState {
+export interface INewsItemFormState {
   title: string;
   content: string;
   image: File | null;
+}
+
+export interface ICommentFormState {
+  author: string;
+  text: string;
 }

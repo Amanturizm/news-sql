@@ -3,8 +3,9 @@ import { useAppDispatch, useAppSelector } from '../../app/hook';
 import { fetchOne } from '../../features/News/newsThunk';
 import { useParams } from 'react-router-dom';
 import NewsItemFull from '../NewsItemFull/NewsItemFull';
-import { fetchALlCurrentNewsItem } from '../../features/Comments/commentsThunk';
+import { fetchALlCurrentNewsItemComments } from '../../features/Comments/commentsThunk';
 import Comments from '../Comments/Comments';
+import { Box } from '@mui/material';
 
 const NewsFull = () => {
   const { id } = useParams() as { id: string };
@@ -16,12 +17,14 @@ const NewsFull = () => {
   useEffect(() => {
     if (id) {
       dispatch(fetchOne(id));
-      dispatch(fetchALlCurrentNewsItem(id));
+      dispatch(fetchALlCurrentNewsItemComments(id));
     }
   }, [id, dispatch]);
 
   return (
-    <div>
+    <Box component="div"
+         margin="30px"
+    >
       {
         newsItemFull ? <NewsItemFull fullItem={newsItemFull} /> : null
       }
@@ -29,7 +32,7 @@ const NewsFull = () => {
       {
         comments ? <Comments comments={comments} /> : null
       }
-    </div>
+    </Box>
   );
 };
 

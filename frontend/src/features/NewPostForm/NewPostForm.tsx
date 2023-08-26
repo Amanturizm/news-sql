@@ -3,9 +3,9 @@ import { Box, Button, TextField, Typography } from '@mui/material';
 import { useAppDispatch } from '../../app/hook';
 import { fetchAll, postOne } from '../News/newsThunk';
 import FileInput from '../../components/UI/FileInput/FileInput';
-import { IFormState } from '../../types';
+import { INewsItemFormState } from '../../types';
 
-const initialState: IFormState = {
+const initialState: INewsItemFormState = {
   title: '',
   content: '',
   image: null,
@@ -14,7 +14,7 @@ const initialState: IFormState = {
 const NewPostForm = () => {
   const dispatch = useAppDispatch();
 
-  const [state, setState] = useState<IFormState>(initialState);
+  const [state, setState] = useState<INewsItemFormState>(initialState);
 
   const changeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, files } = e.target;

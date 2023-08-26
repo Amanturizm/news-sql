@@ -9,6 +9,7 @@ import NotFound from './components/UI/NotFound/NotFound';
 const App = () => (
   <Layout>
     <Routes>
+      <Route path="/" element={<News />} />
       <Route path="/news" element={<News />} />
       <Route path="/news/new-post" element={<NewPostForm />} />
       <Route path="/news/:id" element={<NewsItemFull />} />
